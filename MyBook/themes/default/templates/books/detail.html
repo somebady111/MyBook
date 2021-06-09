@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyBook小说网站</title>
+</head>
+<body>
+    <div>
+        <div>
+            {% if books %}
+            <h1 align="center">{{ books.title }}</h1>
+            <p align="center">作者:{{ books.author }}</p>
+            <hr/>
+            {% endif %}
+        </div>
+        <div>
+            {% for chapte in chaptes %}
+            <p align="center">{{ chapte.chapters }}</p>
+            {{ chapte.content }}
+            {% endfor %}
+            <hr/>
+<!--            评论展示-->
+            {% for comment in comments %}
+            <p>
+                评论人:{{ comment.nickname }}
+                评论内容:{{ comment.content }}
+                评论时间:{{ comment.create_time }}
+             </p>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+</html>

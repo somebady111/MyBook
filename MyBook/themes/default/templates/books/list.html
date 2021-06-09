@@ -1,0 +1,42 @@
+{% extends "./base.html" %}
+
+{% block main %}
+
+<!--展示文章主题内容-->
+    <div>
+        <h4 id="book-title">
+            全部图书:
+        </h4>
+        <ul>
+            {% for book in books %}
+            <li>
+                <a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
+                <div>
+                    <sapn id="book-description">作者:{{ book.author }}</sapn>
+                    <span id="book-description">类型:{{ book.category.name }}</span>
+                    <p>
+                        <span>简介:{{ book.description }}</span>
+                    </p>
+                </div>
+            </li>
+            {% endfor %}
+
+<!--            分页功能-->
+            {% if page_obj %}
+
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+            {% endif %}
+
+            页面: {{ page_obj.number }} and {{ paginator.num_pages }}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            {% endif %}
+
+            {% endif %}
+        </ul>
+        <hr/>
+    </div>
+
+{% endblock %}

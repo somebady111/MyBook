@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">-->
+<!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css">-->
+    <title>MyBook经典小说</title>
+    <style>
+        #begin{
+            color:red;
+            text-align:center;
+            margin-bottom:5px;
+        }
+        #link{
+            text-align:center;
+        }
+        #book-title{
+            color:blue;
+        }
+        #book-description{
+            color:black;
+        }
+    .form-inline{
+        text-align:right;
+    }
+    </style>
+</head>
+<body>
+    <div id="begin">
+        <h1>MyBook小说站点</h1>
+    </div>
+<!--展示顶部分类栏-->
+    <div id="link">
+        <hr/>
+        <a href="/">首页</a>
+        {% for cate in navs %}
+        <a href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
+        {% endfor %}
+        <!--        搜索功能-->
+        <form class="form-inline" action="/search/" method="GET">
+            <input class="form-control" type="search" name="keyword" placeholder="请输入要搜索的图书或作者" aria-label="Search" value="{{ keyword }}">
+            <button class="btn btn-outline-success" type="submit">搜索</button>
+        </form>
+        <hr/>
+    </div>
+
+    {% block main %}
+    {% endblock %}
+
+<!--    展示底部分类栏-->
+<!--    <div>-->
+<!--        {% for cate in categories %}-->
+<!--        <a href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>-->
+<!--        {% endfor %}-->
+<!--        <hr/>-->
+<!--    </div>-->
+
+<!--    展示侧边栏-->
+    <div class="recommend-book">
+        {% for siderbar in siderbars %}
+        <h4 id="book-title">{{ siderbar.title }}</h4>
+        <a href="{% url 'category-list' siderbar.book.id %}">{{ siderbar.book }}</a>
+        <span id="book-description">{{ siderbar.book.description }}</span>
+        {% endfor %}
+    </div>
+</body>
+</html>
